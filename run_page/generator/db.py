@@ -110,7 +110,7 @@ def update_or_create_activity(session, run_activity):
                 try:
                     location_country = str(
                         g.reverse(
-                            f"{start_point.lat}, {start_point.lon}", language="zh-CN"  # type: ignore
+                            f"{start_point.lat}, {start_point.lon}", language="zh-CN", timeout=15  # type: ignore
                         )
                     )
                 # limit (only for the first time)

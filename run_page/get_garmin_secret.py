@@ -1,4 +1,5 @@
 import argparse
+import os
 
 import garth
 
@@ -13,8 +14,9 @@ if __name__ == "__main__":
         help="if garmin account is cn",
     )
     options = parser.parse_args()
+    env_ssl_verify = os.getenv('GARMIN_SSL_VERIFY', 'True').lower() in ('true', '1', 't')
     if options.is_cn:
-        garth.configure(domain="garmin.cn")
+        garth.configure(domain="garmin.cn", ssl_verify=env_ssl_verify)
     garth.login(options.email, options.password)
     secret_string = garth.client.dumps()
     print(secret_string)
